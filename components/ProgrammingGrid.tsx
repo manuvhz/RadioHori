@@ -125,6 +125,7 @@ const ProgrammingGrid: React.FC = () => {
             setCurrentProgram(slot);
             if(audioRef.current && slot.audioSrc) {
                 audioRef.current.src = slot.audioSrc;
+                audioRef.current.load();
                 audioRef.current.play();
             }
         }
