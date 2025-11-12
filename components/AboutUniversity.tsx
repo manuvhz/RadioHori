@@ -19,8 +19,8 @@ const AboutUniversity: React.FC = () => {
             <div className="relative w-full max-w-sm h-80">
               <div className="absolute top-0 left-0 w-full h-full rounded-lg bg-emerald-200 transform -rotate-6 transition-transform duration-500 hover:rotate-0"></div>
               <img 
-                src="https://picsum.photos/400/500?random=1" 
-                alt="Campus universitario" 
+                src="https://caribenoticias247.com/wp-content/uploads/2023/04/Photo_1681361320200.webp" 
+                alt="Campus de la Universidad de Córdoba" 
                 className="absolute top-0 left-0 w-full h-full object-cover rounded-lg shadow-xl"
               />
             </div>
