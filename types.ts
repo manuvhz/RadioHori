@@ -20,7 +20,7 @@ export interface ProgramSlot {
   name: string;
   theme: ProgramTheme;
   Icon: React.FC<{ className?: string }>;
-  audioSrc?: string;
+  soundcloudEmbedUrl?: string;
 }
 
 export interface DailySchedule {

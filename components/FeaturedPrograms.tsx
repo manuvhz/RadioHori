@@ -1,3 +1,4 @@
+
 import React from 'react';
 // FIX: Changed import type to a regular import to allow using the ProgramTheme enum as a value.
 import { FeaturedProgram, ProgramTheme } from '../types';
@@ -55,7 +56,7 @@ const themeStyles: Record<ProgramTheme, { bg: string; text: string; }> = {
 const ProgramCard: React.FC<{ program: FeaturedProgram }> = ({ program }) => {
     const styles = themeStyles[program.theme];
     return (
-        <div className="bg-white rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-all duration-300 group">
+        <div className="bg-white rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-1.5 hover:shadow-xl transition-all duration-300 group">
             <div className={`w-full h-32 flex items-center justify-center ${styles.bg}`}>
                 <program.Icon className={`w-16 h-16 ${styles.text} transition-transform duration-300 group-hover:scale-110`} />
             </div>
@@ -70,7 +71,7 @@ const ProgramCard: React.FC<{ program: FeaturedProgram }> = ({ program }) => {
 
 const FeaturedPrograms: React.FC = () => {
   return (
-    <section id="programas" className="py-20 bg-gray-50">
+    <section id="programas" className="py-20 bg-slate-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-emerald-800">Programas Destacados</h2>

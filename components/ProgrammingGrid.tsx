@@ -1,5 +1,5 @@
-import React, { useState, useRef } from 'react';
-// FIX: Changed import type to a regular import to allow using the ProgramTheme enum as a value.
+
+import React, { useState } from 'react';
 import { DailySchedule, ProgramSlot, ProgramTheme } from '../types';
 
 const BookIcon: React.FC<{ className?: string }> = ({ className }) => (
@@ -61,16 +61,12 @@ const PlayIcon: React.FC<{ className?: string }> = ({ className }) => (
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="0" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M8 5v14l11-7z"></path></svg>
 );
 
-const PauseIcon: React.FC<{ className?: string }> = ({ className }) => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="0" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg>
-);
-
 const SCHEDULE: DailySchedule[] = [
-  { day: 'Lunes', slots: [{ name: 'Novela', theme: ProgramTheme.CULTURE, Icon: BookIcon, audioSrc: '/audio/novela.mp3' }, { name: 'Cultura', theme: ProgramTheme.CULTURE, Icon: MusicIcon }, { name: 'Académico', theme: ProgramTheme.ACADEMIC, Icon: BookIcon }] },
-  { day: 'Martes', slots: [{ name: 'Matutino', theme: ProgramTheme.NEWS, Icon: NewspaperIcon, audioSrc: '/audio/matutino.mp3' }, { name: 'Ciencia', theme: ProgramTheme.SCIENCE, Icon: FlaskIcon }, { name: 'Debate', theme: ProgramTheme.ACADEMIC, Icon: UsersIcon }] },
+  { day: 'Lunes', slots: [{ name: 'Novela', theme: ProgramTheme.CULTURE, Icon: BookIcon, soundcloudEmbedUrl: 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2210426801&color=%23459caa&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true' }, { name: 'Cultura', theme: ProgramTheme.CULTURE, Icon: MusicIcon }, { name: 'Académico', theme: ProgramTheme.ACADEMIC, Icon: BookIcon }] },
+  { day: 'Martes', slots: [{ name: 'Noticiero', theme: ProgramTheme.NEWS, Icon: NewspaperIcon, soundcloudEmbedUrl: 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2211388769&color=%23459caa&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true' }, { name: 'Ciencia', theme: ProgramTheme.SCIENCE, Icon: FlaskIcon }, { name: 'Debate', theme: ProgramTheme.ACADEMIC, Icon: UsersIcon }] },
   { day: 'Miércoles', slots: [{ name: 'Informativo', theme: ProgramTheme.NEWS, Icon: NewspaperIcon }, { name: 'Deportes', theme: ProgramTheme.SPORTS, Icon: DribbbleIcon }, { name: 'Historia', theme: ProgramTheme.CULTURE, Icon: BookIcon }] },
   { day: 'Jueves', slots: [{ name: 'Educativo', theme: ProgramTheme.ACADEMIC, Icon: BookIcon }, { name: 'Arte', theme: ProgramTheme.CULTURE, Icon: MusicIcon }, { name: 'Literatura', theme: ProgramTheme.CULTURE, Icon: BookIcon }] },
-  { day: 'Viernes', slots: [{ name: 'Entretenimiento', theme: ProgramTheme.ENTERTAINMENT, Icon: MusicIcon, audioSrc: '/audio/entretenimiento.mp3' }, { name: 'Música', theme: ProgramTheme.MUSIC, Icon: MusicIcon }, { name: 'Tecnología', theme: ProgramTheme.SCIENCE, Icon: FlaskIcon }] },
+  { day: 'Viernes', slots: [{ name: 'Entretenimiento', theme: ProgramTheme.ENTERTAINMENT, Icon: MusicIcon, soundcloudEmbedUrl: 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2211389876&color=%23459caa&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true' }, { name: 'Música', theme: ProgramTheme.MUSIC, Icon: MusicIcon }, { name: 'Tecnología', theme: ProgramTheme.SCIENCE, Icon: FlaskIcon }] },
   { day: 'Sábado', slots: [{ name: 'Sabatino', theme: ProgramTheme.ENTERTAINMENT, Icon: MicIcon }, { name: 'Juventud', theme: ProgramTheme.ENTERTAINMENT, Icon: UsersIcon }, { name: 'Entretenimiento', theme: ProgramTheme.ENTERTAINMENT, Icon: MusicIcon }] },
   { day: 'Domingo', slots: [{ name: 'Dominical', theme: ProgramTheme.OTHER, Icon: MicIcon }, { name: 'Familiar', theme: ProgramTheme.OTHER, Icon: UsersIcon }, { name: 'Reflexión', theme: ProgramTheme.OTHER, Icon: BookIcon }] },
 ];
@@ -88,68 +84,74 @@ const themeColors: Record<ProgramTheme, {bg: string, text: string, button: strin
   [ProgramTheme.OTHER]: { bg: 'bg-slate-100', text: 'text-slate-800', button: 'hover:bg-slate-200' },
 };
 
-const ProgramCell: React.FC<{ slot: ProgramSlot; onPlay: (slot: ProgramSlot) => void; isPlaying: boolean; isCurrent: boolean }> = ({ slot, onPlay, isPlaying, isCurrent }) => {
+const ProgramCell: React.FC<{ slot: ProgramSlot; onPlay: (slot: ProgramSlot) => void; }> = ({ slot, onPlay }) => {
     const colors = themeColors[slot.theme];
     return (
-        <div className={`p-3 rounded-lg h-full flex flex-col justify-between items-center text-center ${colors.bg} ${colors.text}`}>
+        <div className={`p-3 rounded-lg h-full flex flex-col justify-between items-center text-center ${colors.bg} ${colors.text} transition-all duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-md`}>
             <div className="flex flex-col items-center">
                 <slot.Icon className="w-6 h-6 mb-2 opacity-70"/>
                 <span className="font-semibold text-sm">{slot.name}</span>
             </div>
-            {slot.audioSrc && (
+            {slot.soundcloudEmbedUrl && (
                 <button 
                     onClick={() => onPlay(slot)}
                     className={`mt-2 p-1.5 rounded-full transition-colors duration-200 ${colors.button}`}
-                    aria-label={isPlaying && isCurrent ? `Pausar ${slot.name}` : `Reproducir ${slot.name}`}
+                    aria-label={`Reproducir ${slot.name}`}
                 >
-                    {isCurrent && isPlaying ? <PauseIcon className="w-5 h-5"/> : <PlayIcon className="w-5 h-5"/>}
+                    <PlayIcon className="w-5 h-5"/>
                 </button>
             )}
         </div>
     );
 };
 
-const ProgrammingGrid: React.FC = () => {
-    const [currentProgram, setCurrentProgram] = useState<ProgramSlot | null>(null);
-    const [isPlaying, setIsPlaying] = useState(false);
-    const audioRef = useRef<HTMLAudioElement>(null);
+const PlayerModal: React.FC<{ program: ProgramSlot | null; onClose: () => void }> = ({ program, onClose }) => {
+    if (!program || !program.soundcloudEmbedUrl) return null;
 
-    const handlePlay = (slot: ProgramSlot) => {
-        if (currentProgram?.name === slot.name) {
-            if (isPlaying) {
-                audioRef.current?.pause();
-            } else {
-                audioRef.current?.play();
-            }
-        } else {
-            setCurrentProgram(slot);
-            if(audioRef.current && slot.audioSrc) {
-                audioRef.current.src = slot.audioSrc;
-                audioRef.current.load();
-                audioRef.current.play();
-            }
-        }
+    return (
+        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 transition-opacity duration-300" onClick={onClose}>
+            <div className="bg-white rounded-lg shadow-xl p-4 m-4 max-w-lg w-full transform transition-all duration-300" onClick={(e) => e.stopPropagation()}>
+                <div className="flex justify-between items-center mb-4">
+                    <h3 className="text-xl font-bold text-gray-800">{program.name}</h3>
+                    <button onClick={onClose} className="text-gray-500 hover:text-gray-800" aria-label="Cerrar reproductor">
+                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
+                </div>
+                <iframe 
+                    width="100%" 
+                    height="166" 
+                    scrolling="no" 
+                    frameBorder="no" 
+                    allow="autoplay"
+                    src={program.soundcloudEmbedUrl}>
+                </iframe>
+            </div>
+        </div>
+    );
+};
+
+
+const ProgrammingGrid: React.FC = () => {
+    const [activeProgram, setActiveProgram] = useState<ProgramSlot | null>(null);
+
+    const handleOpenPlayer = (slot: ProgramSlot) => {
+        setActiveProgram(slot);
     };
     
+    const handleClosePlayer = () => {
+        setActiveProgram(null);
+    };
+
   return (
-    <section id="parrilla" className="py-20 bg-gray-50">
+    <section id="parrilla" className="py-20 bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <audio 
-            ref={audioRef} 
-            preload="none"
-            onPlay={() => setIsPlaying(true)}
-            onPause={() => setIsPlaying(false)}
-            onEnded={() => {
-                setIsPlaying(false);
-                setCurrentProgram(null);
-            }}
-        />
+        <PlayerModal program={activeProgram} onClose={handleClosePlayer} />
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-emerald-800">Parrilla de Programación</h2>
           <div className="mt-4 w-24 h-1 bg-emerald-600 mx-auto"></div>
         </div>
         
-        <div className="overflow-x-a-auto">
+        <div className="overflow-x-auto">
           <div className="grid grid-cols-1 md:grid-cols-8 gap-1 min-w-[700px]">
             {/* Time column */}
             <div className="hidden md:flex flex-col">
@@ -169,9 +171,7 @@ const ProgrammingGrid: React.FC = () => {
                   <div key={`${day}-${slot.name}-${index}`} className="h-28">
                     <ProgramCell 
                         slot={slot} 
-                        onPlay={handlePlay}
-                        isPlaying={isPlaying}
-                        isCurrent={currentProgram?.name === slot.name}
+                        onPlay={handleOpenPlayer}
                     />
                   </div>
                 ))}

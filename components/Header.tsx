@@ -25,15 +25,37 @@ const Logo: React.FC = () => (
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    if (href === '#inicio') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      const targetId = href.substring(1);
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+    if (isOpen) {
+        setIsOpen(false);
+    }
+  };
+
   return (
-    <header id="inicio" className="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
+    <header id="inicio" className="bg-white/80 backdrop-blur-md shadow-md sticky top-0 z-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           <Logo />
           <nav className="hidden md:flex space-x-8">
             {NAV_ITEMS.map((item) => (
-              <a key={item.name} href={item.href} className="text-gray-600 hover:text-emerald-700 font-medium transition-colors duration-300">
+              <a 
+                key={item.name} 
+                href={item.href} 
+                onClick={(e) => handleNavClick(e, item.href)}
+                className="relative text-gray-600 hover:text-emerald-700 font-medium transition-colors duration-300 group cursor-pointer"
+              >
                 {item.name}
+                <span className="absolute bottom-[-2px] left-0 w-0 h-0.5 bg-emerald-600 group-hover:w-full transition-all duration-300"></span>
               </a>
             ))}
           </nav>
@@ -50,7 +72,12 @@ const Header: React.FC = () => {
         <div className="md:hidden bg-white shadow-lg">
           <nav className="flex flex-col items-center space-y-4 py-4">
             {NAV_ITEMS.map((item) => (
-              <a key={item.name} href={item.href} className="text-gray-600 hover:text-emerald-700 font-medium" onClick={() => setIsOpen(false)}>
+              <a 
+                key={item.name} 
+                href={item.href} 
+                className="text-gray-600 hover:text-emerald-700 font-medium cursor-pointer" 
+                onClick={(e) => handleNavClick(e, item.href)}
+              >
                 {item.name}
               </a>
             ))}

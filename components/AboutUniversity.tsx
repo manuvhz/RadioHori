@@ -16,12 +16,12 @@ const AboutUniversity: React.FC = () => {
             </blockquote>
           </div>
           <div className="order-1 md:order-2 flex justify-center items-center">
-            <div className="relative w-full max-w-sm h-80">
-              <div className="absolute top-0 left-0 w-full h-full rounded-lg bg-emerald-200 transform -rotate-6 transition-transform duration-500 hover:rotate-0"></div>
+            <div className="relative w-full max-w-sm h-80 group">
+              <div className="absolute top-0 left-0 w-full h-full rounded-lg bg-emerald-200 transform -rotate-6 transition-transform duration-500 group-hover:rotate-0 group-hover:scale-105"></div>
               <img 
                 src="https://caribenoticias247.com/wp-content/uploads/2023/04/Photo_1681361320200.webp" 
                 alt="Campus de la Universidad de Córdoba" 
-                className="absolute top-0 left-0 w-full h-full object-cover rounded-lg shadow-xl"
+                className="absolute top-0 left-0 w-full h-full object-cover rounded-lg shadow-xl transition-shadow duration-500 group-hover:shadow-2xl"
               />
             </div>
           </div>
