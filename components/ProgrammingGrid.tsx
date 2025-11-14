@@ -1,4 +1,5 @@
 
+
 import React, { useState } from 'react';
 import { DailySchedule, ProgramSlot, ProgramTheme } from '../types';
 
@@ -74,14 +75,25 @@ const SCHEDULE: DailySchedule[] = [
 const TIME_SLOTS = ['6:00 – 8:00 AM', '8:00 – 10:00 AM', '10:00 – 12:00 PM'];
 
 const themeColors: Record<ProgramTheme, {bg: string, text: string, button: string}> = {
-  [ProgramTheme.CULTURE]: { bg: 'bg-emerald-50', text: 'text-emerald-800', button: 'hover:bg-emerald-200' },
-  [ProgramTheme.ACADEMIC]: { bg: 'bg-sky-50', text: 'text-sky-800', button: 'hover:bg-sky-200' },
-  [ProgramTheme.SCIENCE]: { bg: 'bg-indigo-50', text: 'text-indigo-800', button: 'hover:bg-indigo-200' },
-  [ProgramTheme.NEWS]: { bg: 'bg-amber-50', text: 'text-amber-800', button: 'hover:bg-amber-200' },
-  [ProgramTheme.MUSIC]: { bg: 'bg-rose-50', text: 'text-rose-800', button: 'hover:bg-rose-200' },
-  [ProgramTheme.ENTERTAINMENT]: { bg: 'bg-purple-50', text: 'text-purple-800', button: 'hover:bg-purple-200' },
-  [ProgramTheme.SPORTS]: { bg: 'bg-orange-50', text: 'text-orange-800', button: 'hover:bg-orange-200' },
-  [ProgramTheme.OTHER]: { bg: 'bg-slate-100', text: 'text-slate-800', button: 'hover:bg-slate-200' },
+  [ProgramTheme.CULTURE]: { bg: 'bg-emerald-100', text: 'text-emerald-800', button: 'hover:bg-emerald-200' },
+  [ProgramTheme.ACADEMIC]: { bg: 'bg-sky-100', text: 'text-sky-800', button: 'hover:bg-sky-200' },
+  [ProgramTheme.SCIENCE]: { bg: 'bg-indigo-100', text: 'text-indigo-800', button: 'hover:bg-indigo-200' },
+  [ProgramTheme.NEWS]: { bg: 'bg-amber-100', text: 'text-amber-800', button: 'hover:bg-amber-200' },
+  [ProgramTheme.MUSIC]: { bg: 'bg-rose-100', text: 'text-rose-800', button: 'hover:bg-rose-200' },
+  [ProgramTheme.ENTERTAINMENT]: { bg: 'bg-purple-100', text: 'text-purple-800', button: 'hover:bg-purple-200' },
+  [ProgramTheme.SPORTS]: { bg: 'bg-orange-100', text: 'text-orange-800', button: 'hover:bg-orange-200' },
+  [ProgramTheme.OTHER]: { bg: 'bg-slate-200', text: 'text-slate-800', button: 'hover:bg-slate-300' },
+};
+
+const themeNames: Record<ProgramTheme, string> = {
+  [ProgramTheme.CULTURE]: 'Cultura',
+  [ProgramTheme.ACADEMIC]: 'Académico',
+  [ProgramTheme.SCIENCE]: 'Ciencia',
+  [ProgramTheme.NEWS]: 'Noticias',
+  [ProgramTheme.MUSIC]: 'Música',
+  [ProgramTheme.ENTERTAINMENT]: 'Entretenimiento',
+  [ProgramTheme.SPORTS]: 'Deportes',
+  [ProgramTheme.OTHER]: 'Otros',
 };
 
 const ProgramCell: React.FC<{ slot: ProgramSlot; onPlay: (slot: ProgramSlot) => void; }> = ({ slot, onPlay }) => {
@@ -151,6 +163,15 @@ const ProgrammingGrid: React.FC = () => {
           <div className="mt-4 w-24 h-1 bg-emerald-600 mx-auto"></div>
         </div>
         
+        <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-3 mb-10">
+            {Object.keys(themeNames).map((theme) => (
+                <div key={theme} className="flex items-center space-x-2">
+                    <span className={`w-4 h-4 rounded-full ${themeColors[theme as ProgramTheme].bg} border border-black/10`}></span>
+                    <span className="text-sm font-medium text-gray-600">{themeNames[theme as ProgramTheme]}</span>
+                </div>
+            ))}
+        </div>
+
         <div className="overflow-x-auto">
           <div className="grid grid-cols-1 md:grid-cols-8 gap-1 min-w-[700px]">
             {/* Time column */}
