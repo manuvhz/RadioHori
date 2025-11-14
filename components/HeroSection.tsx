@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 const HeroSection: React.FC = () => {
@@ -16,16 +15,15 @@ const HeroSection: React.FC = () => {
         className="absolute inset-0 bg-cover bg-center" 
         style={{ 
           backgroundImage: `url('https://colombia.travel/sites/default/files/rio-sinu.jpg')`,
-          filter: 'grayscale(100%)' 
         }}
       ></div>
-      <div className="absolute inset-0 bg-gradient-to-t from-emerald-900/80 via-emerald-900/30 to-transparent"></div>
+      <div className="absolute inset-0 bg-gradient-to-t from-emerald-900/80 via-emerald-500/30 to-white/20"></div>
       <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-4">
         <h1 className="text-4xl md:text-6xl font-bold mb-4" style={{ textShadow: '2px 2px 8px rgba(0,0,0,0.6)' }}>
-          Radio Horizonte del Sinú
+          Horizonte del Sinú
         </h1>
         <p className="text-lg md:text-2xl font-light" style={{ textShadow: '1px 1px 4px rgba(0,0,0,0.6)' }}>
-          La voz universitaria que fluye con el conocimiento.
+          La voz que inspira a nuestra comunidad educativa.
         </p>
         <a 
             href="#parrilla" 
