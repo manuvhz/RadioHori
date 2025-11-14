@@ -8,7 +8,7 @@ const AboutSchool: React.FC = () => {
           <div className="order-2 md:order-1">
             <h2 className="text-3xl font-bold text-emerald-800 mb-4">Sobre Nuestra Institución</h2>
             <p className="text-lg text-gray-600 mb-6">
-              La Institución Educativa El Dorado, ubicada en el corazón de Montería, está comprometida con la formación integral de niños, niñas y jóvenes, fomentando el liderazgo, la excelencia académica y los valores ciudadanos para construir un futuro mejor.
+              La Institución Educativa El Dorado está comprometida con la formación integral de niños, niñas y jóvenes, fomentando el liderazgo, la excelencia académica y los valores ciudadanos para construir un futuro mejor.
             </p>
             <blockquote className="border-l-4 border-emerald-500 pl-4 italic text-gray-700">
               “Educación, disciplina y liderazgo para la transformación social.”
