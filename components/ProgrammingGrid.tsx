@@ -1,5 +1,3 @@
-
-
 import React, { useState } from 'react';
 import { DailySchedule, ProgramSlot, ProgramTheme } from '../types';
 
@@ -62,14 +60,37 @@ const PlayIcon: React.FC<{ className?: string }> = ({ className }) => (
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="0" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M8 5v14l11-7z"></path></svg>
 );
 
+const PaintbrushIcon: React.FC<{ className?: string }> = ({ className }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+        <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z" />
+        <path d="m15 5 4 4" />
+    </svg>
+);
+
+const PROGRAM_DEFINITIONS: Record<string, ProgramSlot> = {
+    MISTERIO: { name: 'Noche Azul', theme: ProgramTheme.MYSTERY, Icon: BookIcon, soundcloudEmbedUrl: 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2214496763&color=%23459caa&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true' },
+    NOTICIERO: { name: 'Actualidad al Instante', theme: ProgramTheme.NEWS, Icon: NewspaperIcon, soundcloudEmbedUrl: 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2214496769&color=%23459caa&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true' },
+    ENTRETENIMIENTO: { name: 'Next Gen Show', theme: ProgramTheme.ENTERTAINMENT, Icon: MusicIcon, soundcloudEmbedUrl: 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2214496760&color=%23459caa&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true' },
+    MUSICA: { name: 'Ritmos del Sinú', theme: ProgramTheme.MUSIC, Icon: MusicIcon, soundcloudEmbedUrl: 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2214496748&color=%23459caa&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true' },
+    LITERATURA: { name: 'Letras del Sinú', theme: ProgramTheme.CULTURE, Icon: BookIcon, soundcloudEmbedUrl: 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2214496754&color=%23459caa&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true' },
+    CIENCIA: { name: 'Ciencia y Tec en Horizonte del Sinú', theme: ProgramTheme.SCIENCE, Icon: FlaskIcon, soundcloudEmbedUrl: 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2214496775&color=%23459caa&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true' },
+    DEPORTES: { name: 'Zona Deportiva', theme: ProgramTheme.SPORTS, Icon: DribbbleIcon, soundcloudEmbedUrl: 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2214496742&color=%23459caa&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true' },
+    DEBATE: { name: 'Horizonte Debate', theme: ProgramTheme.ACADEMIC, Icon: UsersIcon, soundcloudEmbedUrl: 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2214496757&color=%23459caa&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true' },
+    HISTORIA: { name: 'Viaje por la Historia', theme: ProgramTheme.CULTURE, Icon: BookIcon, soundcloudEmbedUrl: 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2214496766&color=%23459caa&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true' },
+    ARTE: { name: 'Arte Sin Fronteras', theme: ProgramTheme.CULTURE, Icon: PaintbrushIcon, soundcloudEmbedUrl: 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2214496772&color=%23459caa&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true' },
+    JUVENTUD: { name: 'Zona Joven', theme: ProgramTheme.ENTERTAINMENT, Icon: UsersIcon, soundcloudEmbedUrl: 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2214496751&color=%23459caa&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true' },
+    ACADEMICO: { name: 'Espacio Académico', theme: ProgramTheme.ACADEMIC, Icon: BookIcon, soundcloudEmbedUrl: 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2214496778&color=%23459caa&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true' },
+    CULTURA: { name: 'Cultura en el Sinú', theme: ProgramTheme.CULTURE, Icon: MicIcon, soundcloudEmbedUrl: 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2214496745&color=%23459caa&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true' },
+};
+
 const SCHEDULE: DailySchedule[] = [
-  { day: 'Lunes', slots: [{ name: 'Novela', theme: ProgramTheme.CULTURE, Icon: BookIcon, soundcloudEmbedUrl: 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2210426801&color=%23459caa&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true' }, { name: 'Cultura', theme: ProgramTheme.CULTURE, Icon: MusicIcon }, { name: 'Académico', theme: ProgramTheme.ACADEMIC, Icon: BookIcon }] },
-  { day: 'Martes', slots: [{ name: 'Noticiero', theme: ProgramTheme.NEWS, Icon: NewspaperIcon, soundcloudEmbedUrl: 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2211388769&color=%23459caa&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true' }, { name: 'Ciencia', theme: ProgramTheme.SCIENCE, Icon: FlaskIcon }, { name: 'Debate', theme: ProgramTheme.ACADEMIC, Icon: UsersIcon }] },
-  { day: 'Miércoles', slots: [{ name: 'Informativo', theme: ProgramTheme.NEWS, Icon: NewspaperIcon }, { name: 'Deportes', theme: ProgramTheme.SPORTS, Icon: DribbbleIcon }, { name: 'Historia', theme: ProgramTheme.CULTURE, Icon: BookIcon }] },
-  { day: 'Jueves', slots: [{ name: 'Educativo', theme: ProgramTheme.ACADEMIC, Icon: BookIcon }, { name: 'Arte', theme: ProgramTheme.CULTURE, Icon: MusicIcon }, { name: 'Literatura', theme: ProgramTheme.CULTURE, Icon: BookIcon }] },
-  { day: 'Viernes', slots: [{ name: 'Entretenimiento', theme: ProgramTheme.ENTERTAINMENT, Icon: MusicIcon, soundcloudEmbedUrl: 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2211389876&color=%23459caa&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true' }, { name: 'Música', theme: ProgramTheme.MUSIC, Icon: MusicIcon }, { name: 'Tecnología', theme: ProgramTheme.SCIENCE, Icon: FlaskIcon }] },
-  { day: 'Sábado', slots: [{ name: 'Sabatino', theme: ProgramTheme.ENTERTAINMENT, Icon: MicIcon }, { name: 'Juventud', theme: ProgramTheme.ENTERTAINMENT, Icon: UsersIcon }, { name: 'Entretenimiento', theme: ProgramTheme.ENTERTAINMENT, Icon: MusicIcon }] },
-  { day: 'Domingo', slots: [{ name: 'Dominical', theme: ProgramTheme.OTHER, Icon: MicIcon }, { name: 'Familiar', theme: ProgramTheme.OTHER, Icon: UsersIcon }, { name: 'Reflexión', theme: ProgramTheme.OTHER, Icon: BookIcon }] },
+    { day: 'Lunes', slots: [PROGRAM_DEFINITIONS.NOTICIERO, PROGRAM_DEFINITIONS.MISTERIO, PROGRAM_DEFINITIONS.DEBATE] },
+    { day: 'Martes', slots: [PROGRAM_DEFINITIONS.ACADEMICO, PROGRAM_DEFINITIONS.CIENCIA, PROGRAM_DEFINITIONS.LITERATURA] },
+    { day: 'Miércoles', slots: [PROGRAM_DEFINITIONS.NOTICIERO, PROGRAM_DEFINITIONS.HISTORIA, PROGRAM_DEFINITIONS.MUSICA] },
+    { day: 'Jueves', slots: [PROGRAM_DEFINITIONS.ARTE, PROGRAM_DEFINITIONS.JUVENTUD, PROGRAM_DEFINITIONS.ENTRETENIMIENTO] },
+    { day: 'Viernes', slots: [PROGRAM_DEFINITIONS.NOTICIERO, PROGRAM_DEFINITIONS.DEPORTES, PROGRAM_DEFINITIONS.MUSICA] },
+    { day: 'Sábado', slots: [PROGRAM_DEFINITIONS.ENTRETENIMIENTO, PROGRAM_DEFINITIONS.MISTERIO, PROGRAM_DEFINITIONS.DEPORTES] },
+    { day: 'Domingo', slots: [PROGRAM_DEFINITIONS.MUSICA, PROGRAM_DEFINITIONS.HISTORIA, PROGRAM_DEFINITIONS.JUVENTUD] },
 ];
 
 const TIME_SLOTS = ['6:00 – 8:00 AM', '8:00 – 10:00 AM', '10:00 – 12:00 PM'];
@@ -82,6 +103,7 @@ const themeColors: Record<ProgramTheme, {bg: string, text: string, button: strin
   [ProgramTheme.MUSIC]: { bg: 'bg-rose-100', text: 'text-rose-800', button: 'hover:bg-rose-200' },
   [ProgramTheme.ENTERTAINMENT]: { bg: 'bg-purple-100', text: 'text-purple-800', button: 'hover:bg-purple-200' },
   [ProgramTheme.SPORTS]: { bg: 'bg-orange-100', text: 'text-orange-800', button: 'hover:bg-orange-200' },
+  [ProgramTheme.MYSTERY]: { bg: 'bg-purple-100', text: 'text-purple-800', button: 'hover:bg-purple-200' },
   [ProgramTheme.OTHER]: { bg: 'bg-slate-200', text: 'text-slate-800', button: 'hover:bg-slate-300' },
 };
 
@@ -93,21 +115,23 @@ const themeNames: Record<ProgramTheme, string> = {
   [ProgramTheme.MUSIC]: 'Música',
   [ProgramTheme.ENTERTAINMENT]: 'Entretenimiento',
   [ProgramTheme.SPORTS]: 'Deportes',
+  [ProgramTheme.MYSTERY]: 'Misterio',
   [ProgramTheme.OTHER]: 'Otros',
 };
 
 const ProgramCell: React.FC<{ slot: ProgramSlot; onPlay: (slot: ProgramSlot) => void; }> = ({ slot, onPlay }) => {
     const colors = themeColors[slot.theme];
     return (
-        <div className={`p-3 rounded-lg h-full flex flex-col justify-between items-center text-center ${colors.bg} ${colors.text} transition-all duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-md`}>
-            <div className="flex flex-col items-center">
-                <slot.Icon className="w-6 h-6 mb-2 opacity-70"/>
-                <span className="font-semibold text-sm">{slot.name}</span>
+        <div className={`p-2 rounded-lg h-full flex flex-col justify-between items-center text-center ${colors.bg} ${colors.text} transition-all duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-md`}>
+            <div className="flex flex-col items-center overflow-hidden">
+                <slot.Icon className="w-6 h-6 mb-1 opacity-70"/>
+                <span className="font-semibold text-sm leading-tight">{slot.name}</span>
+                <span className="text-xs opacity-75 mt-1">{themeNames[slot.theme]}</span>
             </div>
             {slot.soundcloudEmbedUrl && (
                 <button 
                     onClick={() => onPlay(slot)}
-                    className={`mt-2 p-1.5 rounded-full transition-colors duration-200 ${colors.button}`}
+                    className={`mt-1 p-1.5 rounded-full transition-colors duration-200 ${colors.button} flex-shrink-0`}
                     aria-label={`Reproducir ${slot.name}`}
                 >
                     <PlayIcon className="w-5 h-5"/>
@@ -164,7 +188,7 @@ const ProgrammingGrid: React.FC = () => {
         </div>
         
         <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-3 mb-10">
-            {Object.keys(themeNames).map((theme) => (
+            {Object.values(ProgramTheme).filter(t => t !== ProgramTheme.OTHER).map((theme) => (
                 <div key={theme} className="flex items-center space-x-2">
                     <span className={`w-4 h-4 rounded-full ${themeColors[theme as ProgramTheme].bg} border border-black/10`}></span>
                     <span className="text-sm font-medium text-gray-600">{themeNames[theme as ProgramTheme]}</span>

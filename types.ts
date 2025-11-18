@@ -13,6 +13,7 @@ export enum ProgramTheme {
   MUSIC = 'MUSIC',
   ENTERTAINMENT = 'ENTERTAINMENT',
   SPORTS = 'SPORTS',
+  MYSTERY = 'MYSTERY',
   OTHER = 'OTHER',
 }
 
@@ -31,7 +32,7 @@ export interface DailySchedule {
 export interface FeaturedProgram {
   name: string;
   description: string;
-  schedule: string;
   theme: ProgramTheme;
   Icon: React.FC<{ className?: string }>;
+  soundcloudEmbedUrl?: string;
 }

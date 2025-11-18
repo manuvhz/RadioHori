@@ -14,9 +14,9 @@ const App: React.FC = () => {
       <main>
         <HeroSection />
         <ProgrammingGrid />
+        <FeaturedPrograms />
         <AboutSchool />
         <MissionVision />
-        <FeaturedPrograms />
       </main>
       <Footer />
     </div>
