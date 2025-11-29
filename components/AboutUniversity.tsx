@@ -6,11 +6,11 @@ const AboutSchool: React.FC = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div className="order-2 md:order-1">
-            <h2 className="text-3xl font-bold text-emerald-800 mb-4">Sobre Nuestra Institución</h2>
-            <p className="text-lg text-gray-600 mb-6">
+            <h2 className="text-3xl font-bold text-emerald-800 mb-6">Sobre Nuestra Institución</h2>
+            <p className="text-lg text-gray-600 mb-6 leading-relaxed">
               La Institución Educativa El Dorado está comprometida con la formación integral de niños, niñas y jóvenes, fomentando el liderazgo, la excelencia académica y los valores ciudadanos para construir un futuro mejor.
             </p>
-            <blockquote className="border-l-4 border-emerald-500 pl-4 italic text-gray-700">
+            <blockquote className="border-l-4 border-emerald-500 pl-4 italic text-gray-700 bg-emerald-50 p-4 rounded-r-lg">
               “Educación, disciplina y liderazgo para la transformación social.”
             </blockquote>
           </div>

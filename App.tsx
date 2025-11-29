@@ -6,6 +6,7 @@ import AboutSchool from './components/AboutUniversity';
 import MissionVision from './components/MissionVision';
 import FeaturedPrograms from './components/FeaturedPrograms';
 import Footer from './components/Footer';
+import JingleSection from './components/JingleSection';
 
 const App: React.FC = () => {
   return (
@@ -13,6 +14,7 @@ const App: React.FC = () => {
       <Header />
       <main>
         <HeroSection />
+        <JingleSection />
         <ProgrammingGrid />
         <FeaturedPrograms />
         <AboutSchool />
